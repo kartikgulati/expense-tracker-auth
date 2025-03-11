@@ -13,16 +13,16 @@ export default function UserProfile() {
   return (
     <div className="flex justify-between items-center mb-8">
       <div>
-        <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.firstName || 'User'}!</h1>
+        <h1 className="text-2xl font-bold text-gray-800">Welcome, {user?.firstName || 'Saver'}!</h1>
         <p className="text-gray-600">Manage your expenses</p>
       </div>
       
       <div className="flex items-center gap-4">
         <Link 
           href="/"
-          className="text-blue-600 hover:text-blue-800 transition-colors"
+          className="text-blue-600 hover:text-blue-800 transition-colors font-bold text-xl"
         >
-          Home
+         Home
         </Link>
         <UserButton afterSignOutUrl="/" />
       </div>

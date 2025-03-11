@@ -197,7 +197,7 @@ export default function ExpenseSummary() {
         <h2 className="text-xl font-semibold">Expense Summary</h2>
         <button 
           onClick={handlePrint}
-          className="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors flex items-center"
+          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors flex items-center text-sm "
         >
           <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
@@ -209,7 +209,7 @@ export default function ExpenseSummary() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div className="bg-blue-50 p-4 rounded-lg">
           <p className="text-sm text-blue-600 font-medium">Total Expenses</p>
-          <p className="text-2xl font-bold">${summary.totalExpenses.toFixed(2)}</p>
+          <p className="text-2xl font-bold">${summary.totalExpenses}</p>
         </div>
         
         <div className="bg-green-50 p-4 rounded-lg">

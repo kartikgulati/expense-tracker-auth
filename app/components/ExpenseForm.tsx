@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useExpenses } from '../context/ExpenseContext';
 import { CATEGORIES } from '../types';
@@ -13,22 +13,48 @@ type FormData = {
 };
 
 export default function ExpenseForm() {
-  const { addExpense } = useExpenses();
+  const { addExpense, editExpense, selectedExpense, setSelectedExpense } = useExpenses();
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm<FormData>();
+  const [formData, setFormData] = useState({
+    title: '',
+    amount: '',
+    category: '',
+    date: new Date().toISOString().split('T')[0],
+  });
+
+  useEffect(() => {
+    if (selectedExpense) {
+      setFormData({
+        title: selectedExpense.title,
+        amount: selectedExpense.amount.toString(),
+        category: selectedExpense.category,
+        date: new Date(selectedExpense.date).toISOString().split('T')[0],
+      });
+    }
+  }, [selectedExpense]);
 
   const onSubmit = (data: FormData) => {
-    addExpense({
+    const expenseData = {
+      id: selectedExpense?.id || crypto.randomUUID(),
       title: data.title,
       amount: Number(data.amount),
       category: data.category,
-      date: data.date,
-    });
+      date: new Date(data.date).toISOString(),
+    };
+
+    if (selectedExpense) {
+      editExpense(selectedExpense.id, expenseData);
+    } else {
+      addExpense(expenseData);
+    }
+
     reset();
+    setSelectedExpense(null);
   };
 
   return (
@@ -109,8 +135,17 @@ export default function ExpenseForm() {
           type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
         >
-          Add Expense
+          {selectedExpense ? 'Update Expense' : 'Add Expense'}
         </button>
+        {selectedExpense && (
+          <button
+            type="button"
+            onClick={() => setSelectedExpense(null)}
+            className="w-full mt-2 bg-gray-500 text-white py-2 px-4 rounded hover:bg-gray-600"
+          >
+            Cancel Edit
+          </button>
+        )}
       </form>
     </div>
   );

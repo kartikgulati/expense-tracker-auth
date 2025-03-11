@@ -5,7 +5,11 @@ import { useExpenses } from '../context/ExpenseContext';
 import { format } from 'date-fns';
 
 export default function ExpenseList() {
-  const { expenses, deleteExpense } = useExpenses();
+  const { expenses, deleteExpense, setSelectedExpense } = useExpenses();
+
+  const handleEdit = (expense: Expense) => {
+    setSelectedExpense(expense);
+  };
 
   if (expenses.length === 0) {
     return (
@@ -56,6 +60,12 @@ export default function ExpenseList() {
                   {format(new Date(expense.date), 'MMM dd, yyyy')}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                  <button
+                    onClick={() => handleEdit(expense)}
+                    className="text-blue-600 hover:text-blue-900 mr-4"
+                  >
+                    Edit
+                  </button>
                   <button
                     onClick={() => deleteExpense(expense.id)}
                     className="text-red-600 hover:text-red-900"

@@ -94,15 +94,15 @@ export default function ExpenseChart() {
   if (expenses.length === 0) {
     return (
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h2 className="text-xl font-semibold mb-4">Expense Analytics</h2>
-        <p className="text-gray-500">Add expenses to see analytics.</p>
+        <h2 className="text-xl font-semibold mb-4">Expense Graphs</h2>
+        <p className="text-gray-500">Add expenses to see graphs.</p>
       </div>
     );
   }
 
   return (
     <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-6">Expense Analytics</h2>
+      <h2 className="text-xl font-semibold mb-6">Expense Graphs</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div>
